@@ -1,0 +1,12 @@
+:root {
+  --ion-background-color: white;
+}
+
+.ios {
+  --ion-text-color: black;
+}
+
+.personi {
+  --color: rgb(223, 30, 30);
+  --size-font: 30px;
+}
