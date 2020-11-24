@@ -6,18 +6,19 @@ import {
   IonToolbar,
   IonPage,
 
-  IonButtons,
+  IonButton,
   IonBackButton,
   IonFab,
   IonFabButton,
   IonIcon,
+  IonButtons,
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router";
 import { firestore } from "../firebase";
 import { Entry, toEntry } from "../model";
 import { useAuth } from "../auth";
-import { remove as deleteIcon} from 'ionicons/icons';
+import { trash as deleteIcon} from 'ionicons/icons';
 import { useHistory } from "react-router-dom";
 
 import moment from 'moment';
@@ -26,7 +27,7 @@ import moment from 'moment';
 const formatDate = (inputDate: string) => {
   const date = moment(inputDate);
   return (
-    date.format('MMMM DD, YY, h:mm:ss a')
+    date.format('MMMM DD, YYYY')
   );
 }
 
@@ -52,29 +53,29 @@ const EntryPage: React.FC = () => {
   function handleDelete() {
     firestore.collection('users').doc(userId).collection('entries').doc(id)
     .delete() 
-      history.goBack();
-    
-      
+      history.goBack(); 
     };
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-        <IonFab  vertical="bottom" horizontal="end">
-        <IonFabButton >
-        <IonIcon onClick={handleDelete} icon={deleteIcon} />
-        </IonFabButton>
-       </IonFab>
+       
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>{entry?.title} </IonTitle>
+          <IonTitle> {formatDate(entry?.date)}</IonTitle>
+          <IonButton slot="end" onClick={handleDelete} fill="clear">
+          <IonIcon  icon={deleteIcon} />
+          </IonButton>
+
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">{entry?.description} <br>
-     </br>
-     {formatDate(entry?.date)}
+      <IonContent className="ion-padding">
+      <h2>{entry?.title}</h2>
+        <p>{entry?.description}</p> 
+    
+    
      </IonContent>
      
     </IonPage>

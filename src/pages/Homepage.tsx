@@ -17,6 +17,7 @@ import MainTimer from "../components/timer/MainTimer";
 import { Entry, toEntry } from "../model";
 import { useAuth } from "../auth";
 import { add as addIcon} from 'ionicons/icons';
+import moment from 'moment';
 
 const HomePage: React.FC = () => {
   const { userId } = useAuth();
@@ -31,6 +32,13 @@ const HomePage: React.FC = () => {
     return entriesRef.orderBy('date','desc').limit(7).onSnapshot(({docs})=> setEntries(docs.map(toEntry)));   /*  checks for new data on firestore */  
       }, []);
 
+
+      const formatDate = (inputDate: string) => {
+        const date = moment(inputDate);
+        return (
+          date.format('MMMM DD, YYYY')
+        );
+      }
   return (
     <IonPage>
       <IonHeader>
@@ -44,7 +52,11 @@ const HomePage: React.FC = () => {
         <IonList>
           {entries.map((entry) => (
             <IonItem button key={entry?.id} routerLink={`/my/entry/${entry.id}`}>
-              Title:{entry.title}
+              <IonLabel>
+                <h1> {formatDate(entry?.date)}</h1>
+                <h2> {entry.title}</h2>
+              </IonLabel>
+             
             </IonItem>
           ))}
         </IonList>
