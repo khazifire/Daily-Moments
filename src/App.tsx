@@ -10,10 +10,10 @@ import { AuthContext, useAuthInit } from './auth';
 import { auth } from './firebase';
 
 
-import LoginPage from './pages/LoginPage';
+import LoginPage from './components/loginAndRegister/LoginPage';
 import AppTab from './AppTab';
 import NotFoundPage from './pages/NotFoundPage';
-import RegisterPage from './pages/RegisterPage';
+import RegisterPage from './components/loginAndRegister/RegisterPage';
 
 
 

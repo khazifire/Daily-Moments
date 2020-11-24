@@ -1,27 +1,18 @@
 import {
-  IonApp,
+ 
   IonContent,
   IonHeader,
   IonTitle,
   IonToolbar,
   IonPage,
-  IonList,
+ 
   IonButtons,
   IonBackButton,
-  IonDatetime,
-  IonFooter,
-  IonItem,
-  IonLabel,
+
 } from "@ionic/react";
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, {  } from "react";
 import LineRechartComponent from "../components/AreaChart";
-import { entries } from "../data";
-import { useLocalStorage } from "../hook";
-import SettingsPage from "./SettingsPage";
-import { firestore } from "../firebase";
-import { useEffect } from "react";
-import MangoChart from "../components/MangoChart";
+
 
 // function ProgressReport() {
 //     return (

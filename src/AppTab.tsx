@@ -15,6 +15,7 @@ import {
   import SettingsPage from './pages/SettingsPage';
   import EntryPage from './pages/EntryPage';
   import AddEntryPage from './pages/AddEntryPage';
+  import TimeTracker from './components/TimeTrackerPages/TimeTracker';
 
 
 import { useAuth } from './auth';
@@ -46,6 +47,10 @@ import ProgressReport from './pages/ProgressReport';
         <Route path="/my/setting" component={SettingsPage}> 
           <SettingsPage />
         </Route>
+
+        <Route path="/my/TimeTracker" component={TimeTracker}> 
+          <TimeTracker />
+        </Route>
   
         <Route path="/my/progressreport" component={ProgressReport}> 
           <ProgressReport />
@@ -67,9 +72,9 @@ import ProgressReport from './pages/ProgressReport';
             <IonLabel>Entry</IonLabel>
           </IonTabButton> */}
   
-          <IonTabButton tab="tab3" href="/my/setting">
+          <IonTabButton tab="tab3" href="/my/TimeTracker">
             <IonIcon icon={settingsIcon} />
-            <IonLabel>Settings</IonLabel>
+            <IonLabel>Tracker</IonLabel>
           </IonTabButton>
   
           <IonTabButton tab="tab4" href="/my/addentry/add">

@@ -1,14 +1,14 @@
-import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonPopover, IonTextarea } from "@ionic/react";
-import React, { useState, useEffect } from "react";
+import { IonButton, IonContent, IonItem, IonLabel, IonPopover, IonTextarea } from "@ionic/react";
+import React, { useState} from "react";
 import Timer from "react-compound-timer";
 
 import { useAuth } from "../../auth";
 import { useHistory } from "react-router-dom";
 import { firestore } from "../../firebase";
-import { isMoment } from "moment";
+
 import moment from 'moment';
-import { DiffieHellman } from "crypto";
-import { timeOutline } from "ionicons/icons";
+
+
 
 /* https://vercel.com/khazifire/mango-time-tracker/settings/domains
 https://github.com/chanrose/vls/blob/main/package.json */
@@ -17,39 +17,56 @@ https://github.com/chanrose/vls/blob/main/package.json */
 const MainTimer = () => {
   var [timerValue, setTimerValue] = useState('');
   const [showPopover, setShowPopover] = useState(false);
+  const [timeIn, setTimeIn] = useState('');
+  const [timeOut, setTimeOut] = useState('');  
+  const [timeSaved, setTimeSaved] = useState('');
 
-  const [StartingTime, setStartingTime] = useState('');
-  const [PausingTime, setPausingTime] = useState('');
-  const [StopingTIme, setStopingTIme] = useState('');
-  const [WorkedTime, setWorkedTime] = useState<any>('');
+
 
 
   const { userId } = useAuth();
-  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const history = useHistory();
 
-
-  function timeWorked (){
-    
-    const startedTime = moment(StartingTime);
-    const stoppedTime = moment(StopingTIme);
-    console.log(startedTime, "timestartedddd");
-    const totaltime = stoppedTime.diff(startedTime, 'minutes')
-   setWorkedTime(totaltime); 
-    console.log(totaltime, "  totaltimeeeeeeeeee"); 
-  }
 
   function StoreTime() {
     firestore.collection("users").doc(userId).collection("entries")
       .add({
         description: description,
         title: description,
-        workedTime: timerValue ,
+        workedTime: description,
         date: new Date()
       })
     history.goBack();
   }
+
+  
+  
+  
+    const handleTimeIn = () => {
+      const now = moment();
+      console.log("Time In: ", now);
+      setTimeIn(now.toISOString());    
+    }
+  
+    const handleTimeOut = () => {
+      const now = moment();  
+      console.log("Time Out: ", now);
+      setTimeOut(now.toISOString());  
+    }
+  
+    const handleSaveTime = () => {
+      const time1 = moment(timeIn);
+      const time2 = moment(timeOut);
+      const timeDiff = time2.diff(time1);
+      console.log(timeDiff/1000, "Second");
+    }
+  
+
+
+
+
+
 
   return (
     <Timer
@@ -82,39 +99,28 @@ const MainTimer = () => {
 
 
               <IonButton onClick={() =>{ 
-                start()       
-            
-                const TimeOnStart = moment().format('hh:mm:ss');
-                console.log("TimeOnStart", TimeOnStart) 
-                setStartingTime(TimeOnStart);
-               
-
+                start();       
+                handleTimeIn();
               }}> START 
               </IonButton>
 
 
               <IonButton  onClick={() =>{pause()
-              const TimeOnPause = moment() 
-              console.log("TimeOnPause", TimeOnPause)
-              
               }}> PAUSE 
             </IonButton>
              
               <IonButton  
               onClick={() => { stop();  reset();
-                const TimeOnStop = moment().format('hh:mm:ss');
-
-             /*    const TimeOnStop = moment().toISOString(); */
-                console.log("TimeOnStop", TimeOnStop);
-                
+                handleTimeOut();
                 StoreTime();
-                setShowPopover(true);
-                setStopingTIme(TimeOnStop);
-                timeWorked();
-                
+               
               }}> STOP </IonButton>
-
-              <p>{StartingTime}</p>
+ <IonButton  
+              onClick={() => { 
+                handleSaveTime();
+                setShowPopover(true);
+              }}> STOP </IonButton>
+           
           </div>
            
 

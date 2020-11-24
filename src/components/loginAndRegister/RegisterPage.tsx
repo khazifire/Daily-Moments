@@ -1,27 +1,23 @@
 import {
-  IonApp,
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonPage,
-  IonRouterLink,
   IonList,
   IonItem,
-  IonRow,
-  IonCol,
-  IonIcon,
   IonLabel,
   IonInput,
   IonButton,
   IonText,
-  IonLoading
+  IonLoading,
+IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
 } from '@ionic/react';
 
 import React, { useState } from 'react';
-import { useAuth } from '../auth';
-import { auth } from '../firebase';
-import '../components/Login.css';
+import { useAuth } from '../../auth';
+import { auth } from '../../firebase';
+
 import { Redirect } from 'react-router';
 
 
@@ -54,7 +50,68 @@ const RegisterPage: React.FC = () => {
   }
 
   return (
-    <IonPage>
+<IonPage>
+    <IonContent color="light" fullscreen>
+      <IonCard className="ionCardstyle">
+        <IonCardHeader>
+          <img
+            className="imageSize"
+            src=""
+          />
+          <IonCardTitle className="centerText">Sign Up</IonCardTitle>
+        </IonCardHeader>
+
+          <IonCardContent>
+            <IonList>
+              <IonItem>
+                <IonLabel position="stacked">Email</IonLabel>
+                <IonInput
+                  type="email"
+                  value={email}
+                  onIonChange={(event) => setEmail(event.detail.value)}
+                  placeholder="Email"
+                />
+              </IonItem>
+
+              <IonItem>
+                <IonLabel position="stacked">Password</IonLabel>
+                <IonInput
+                  type="password"
+                  value={password}
+                  onIonChange={(event) => setPassword(event.detail.value)}
+                  placeholder="Password"
+                />
+              </IonItem>
+            </IonList>
+            {status.error &&
+              <IonText color="danger">Registration Failed</IonText>
+          }
+
+            <IonButton 
+            expand="block" 
+            onClick={handleRegister}>Sign Up
+            </IonButton>
+
+            <IonButton 
+            expand="block" 
+            fill="clear" 
+            routerLink="/login">Already have an account?
+              </IonButton>
+
+              <IonLoading isOpen={status.loading}></IonLoading>
+
+            {/* <IonLoading isOpen={status.loading}></IonLoading> */}
+          </IonCardContent>
+        </IonCard>
+      </IonContent>
+    </IonPage>
+  );
+};
+
+
+
+
+  /*   <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Register</IonTitle>
@@ -89,7 +146,7 @@ const RegisterPage: React.FC = () => {
     </IonPage>
   );
 };
-
+ */
 
 
 export default RegisterPage;
