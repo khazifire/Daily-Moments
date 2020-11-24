@@ -1,0 +1,57 @@
+.ionContent {
+  --color: light blue;
+  --background-color: #D6DFD4;
+}
+
+.imageSize {
+  display: block;
+  margin-top: 5vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+}
+
+.ionCardstyle {
+  border-radius: 20px;
+  margin-top: 8vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.centerDiv {
+  display: block;
+  text-align: center;
+  width: 15vw;
+}
+
+.centerText {
+  text-align: center;
+}
+
+.centerText img {
+  display: block;
+  border-radius: 50%;
+  border: 100px solid #12E3D7;
+  background-color: #12E3D7;
+}
+
+.flagIcon {
+  display: block;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #12E3D7;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grayStraightLine {
+  margin-left: 0vw;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  height: 15vh;
+  margin-bottom: 1vh;
+}
+
+.IonButtonRadius {
+  --border-radius: 30px;
+}
