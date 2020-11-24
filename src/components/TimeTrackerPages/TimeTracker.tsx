@@ -29,6 +29,7 @@ const SettingsPage: React.FC = () => {
   const [description, setDescription] = useState("");
   const history = useHistory();
   const [showPopover, setShowPopover] = useState(false);
+  const [timeworked, settimeworked] = useState<any>("");
 
   const handleTimeIn = () => {
     const now = moment();
@@ -46,20 +47,25 @@ const SettingsPage: React.FC = () => {
     const time1 = moment(timeIn);
     const time2 = moment(timeOut);
     const timeDiff = time2.diff(time1);
+    const inseconds = (timeDiff / 1000);
     console.log(timeDiff / 1000, "Second");
+    console.log(inseconds, "innnnnnnSecond");
+   settimeworked(inseconds) 
   };
 
   const workedTimePopUp = () => {
+    
     handleSaveTime();
-    setShowPopover(false);
     StoreTimeInFirestore();
+    setShowPopover(false);
+    
   };
 
   function StoreTimeInFirestore() {
     firestore.collection("users").doc(userId).collection("entries").add({
       description: description,
       title: description,
-      workedTime: description,
+      workedTime: timeworked,
       date: new Date(),
     });
     history.goBack();
@@ -77,71 +83,30 @@ const SettingsPage: React.FC = () => {
             <IonText>Stopwatch</IonText>
           </IonCardHeader>
 
-          <Timer
-            formatValue={(value) => `${value < 10 ? `0${value}` : value}`}
-            initialTime={0}
-            startImmediately={false}
-          >
+          <Timer formatValue={(value) => `${value < 10 ? `0${value}` : value}`} initialTime={0} startImmediately={false}>
             {({ start, pause, stop, reset }) => (
               <>
-                <h1>
-                  {" "}
-                  <Timer.Hours />:<Timer.Minutes />:<Timer.Seconds />
-                </h1>
+                <h1> <Timer.Hours />:<Timer.Minutes />:<Timer.Seconds /></h1>
 
                 <IonCardContent>
-                  <IonButton
-                    onClick={() => {
-                      start();
-                      handleTimeIn();
-                    }}
-                  >
-                    {" "}
-                    Time In{" "}
-                  </IonButton>
-                  <IonButton
-                    onClick={() => {
-                      pause();
-                      handleTimeOut();
-                    }}
-                    color="danger"
-                  >
-                    {" "}
-                    TimeOut{" "}
-                  </IonButton>
-                  <IonButton
-                    onClick={() => {
-                      reset();
-                      handleSaveTime();
-                      setShowPopover(true);
-                    }}
-                    color="secondary"
-                  >
-                    {" "}
-                    SaveTime{" "}
-                  </IonButton>
+                  <IonButton onClick={() => {start(); handleTimeIn()}}>Start</IonButton>
+                  <IonButton color="danger" onClick={() => {pause(); handleTimeOut(); }} > Stop </IonButton>
+                  <IonButton color="secondary" onClick={() => {reset(); handleSaveTime();setShowPopover(true)}}> SaveTime </IonButton>
                 </IonCardContent>
               </>
             )}
           </Timer>
         </IonCard>
-        <IonPopover
-          isOpen={showPopover}
-          cssClass="conainer-of-Pop-Ups"
-          onDidDismiss={(e) => setShowPopover(false)}
-        >
+
+        <IonPopover isOpen={showPopover} cssClass="conainer-of-Pop-Ups"onDidDismiss={(e) => workedTimePopUp()}>
           <p className="centerText">Congratulation!</p>
           <p className="centerText">You spent working </p>
-          <IonButton className="IonButtonRadius" expand="block">
-            View Report
-          </IonButton>
+          <IonButton className="IonButtonRadius" expand="block"> View Report </IonButton> 
         </IonPopover>
+
       </IonContent>
       <IonLabel position="stacked">What are you working on</IonLabel>
-      <IonTextarea
-        value={description}
-        onIonChange={(event) => setDescription(event.detail.value)}
-      />
+      <IonTextarea value={description} onIonChange={(event) => setDescription(event.detail.value)}/>
     </IonPage>
   );
 };
