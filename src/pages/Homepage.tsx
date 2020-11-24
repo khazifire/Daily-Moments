@@ -13,7 +13,7 @@ import {
 } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { firestore } from "../firebase";
-import MainTimer from "../components/timer/MainTimer";
+
 import { Entry, toEntry } from "../model";
 import { useAuth } from "../auth";
 import { add as addIcon} from 'ionicons/icons';
@@ -68,7 +68,7 @@ const HomePage: React.FC = () => {
        </IonFab>
     
       
-        <MainTimer />
+      
       </IonContent>
     </IonPage>
   );
