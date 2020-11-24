@@ -70,8 +70,9 @@ const EntryPage: React.FC = () => {
       <IonContent className="ion-padding">
       <h2>{entry?.title}</h2>
         <p>{entry?.description}</p> 
+       
     
-    
+     
      </IonContent>
      
     </IonPage>

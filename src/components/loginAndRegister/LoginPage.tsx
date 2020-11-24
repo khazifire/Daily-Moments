@@ -2,11 +2,11 @@ import {
   IonContent,
   IonPage,
   IonItem,
-  IonLabel,
+  /* IonLabel, */
   IonInput,
   IonButton,
   IonText,
-  IonLoading,
+/*   IonLoading, */
   IonList,
   IonCard,
   IonCardHeader,
@@ -64,7 +64,7 @@ const LoginPage: React.FC = () => {
           <IonCardContent>
             <IonList>
               <IonItem>
-                <IonLabel position="stacked">Email</IonLabel>
+             {/*    <IonLabel position="stacked">Email</IonLabel> */}
                 <IonInput
                   type="email"
                   value={email}
@@ -74,7 +74,7 @@ const LoginPage: React.FC = () => {
               </IonItem>
 
               <IonItem>
-                <IonLabel position="stacked">Password</IonLabel>
+               {/*  <IonLabel position="stacked">Password</IonLabel> */}
                 <IonInput
                   type="password"
                   value={password}
