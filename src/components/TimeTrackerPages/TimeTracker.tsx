@@ -30,7 +30,7 @@ const SettingsPage: React.FC = () => {
   const history = useHistory();
   const [showPopover, setShowPopover] = useState(false);
   const [timeworked, settimeworked] = useState<any>("");
-  const [timeOnPause, settimeOnPause] = useState<any>(0);
+  const [timeOnPause, settimeOnPause] = useState<any>();
 
   const handleTimeIn = () => {
     const now = moment();

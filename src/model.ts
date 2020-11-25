@@ -4,6 +4,7 @@ export interface Entry {
     description: string;
     date: string;
     workedTime: any;
+    pictureUrl: string;
 
 }
 
