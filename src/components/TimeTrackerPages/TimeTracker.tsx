@@ -30,6 +30,7 @@ const SettingsPage: React.FC = () => {
   const history = useHistory();
   const [showPopover, setShowPopover] = useState(false);
   const [timeworked, settimeworked] = useState<any>("");
+  const [timeOnPause, settimeOnPause] = useState<any>(0);
 
   const handleTimeIn = () => {
     const now = moment();
@@ -47,10 +48,14 @@ const SettingsPage: React.FC = () => {
     const time1 = moment(timeIn);
     const time2 = moment(timeOut);
     const timeDiff = time2.diff(time1);
+
     const inseconds = (timeDiff / 1000);
     console.log(timeDiff / 1000, "Second");
+    settimeworked(inseconds) 
     console.log(inseconds, "innnnnnnSecond");
-   settimeworked(inseconds) 
+    settimeOnPause(inseconds+timeOnPause);
+    console.log(timeOnPause, "innnnnnnSecondTOTAL");
+   
   };
 
   const workedTimePopUp = () => {
