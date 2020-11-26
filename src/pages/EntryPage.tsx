@@ -36,14 +36,8 @@ const EntryPage: React.FC = () => {
   const { id } = match.params;
   const [entry, setEntry] = useState<Entry>();
   const { userId } = useAuth();
-  const [entries, setEntries] = useState<Entry[]>([]);
   const history = useHistory();
 
-  useEffect(() => {
-    const entryRef = firestore.collection("users").doc(userId).collection("entries").doc(id);
-    entryRef.get().then((doc) => {setEntry(toEntry(doc));
-    });
-  }, [userId, id]);
 
   
   function handleDelete() {
@@ -51,6 +45,14 @@ const EntryPage: React.FC = () => {
     .delete() 
       history.goBack(); 
     };
+
+
+    useEffect(() => {
+        const entryRef = firestore.collection("users").doc(userId).collection("entries").doc(id);
+        entryRef.get().then((doc) => {setEntry(toEntry(doc));
+        });
+      }, [userId, id]);
+
 
   return (
     <IonPage>

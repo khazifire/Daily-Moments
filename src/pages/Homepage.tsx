@@ -52,19 +52,19 @@ const HomePage: React.FC = () => {
       <IonContent className="ion-padding">
         <IonLabel>hi! welcome to mangotime</IonLabel>
         <IonList>
-          {entries.map((entry) => (
-            <IonItem button key={entry?.id} routerLink={`/my/entry/${entry.id}`}>
+          {entries.map((entry) => 
+            <IonItem button key={entry.id} routerLink={`/my/entry/${entry.id}`}>
               <IonThumbnail slot="end">
-<IonImg src={entry?.pictureUrl}/>
+            <IonImg src={entry.pictureUrl}/>
               </IonThumbnail>
               
               <IonLabel>
-                <h1> {formatDate(entry?.date)}</h1>
+                <h1> {formatDate(entry.date)}</h1>
                 <h2> {entry.title}</h2>
               </IonLabel>
              
             </IonItem>
-          ))}
+          )}
         </IonList>
      
         <IonFab vertical="bottom" horizontal="end">
