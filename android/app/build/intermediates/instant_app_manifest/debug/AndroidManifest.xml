@@ -46,8 +46,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name="org.example.dailymoments.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"

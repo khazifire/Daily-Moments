@@ -11,14 +11,16 @@ import {
   IonBackButton,
   IonItem,
   IonTextarea,
-  IonDatetime
+  IonDatetime,
+  isPlatform
 
 } from "@ionic/react";
 import React, { useEffect, useRef, useState } from "react";
 import { firestore, storage } from "../firebase";
 import { useAuth } from "../auth";
 import { useHistory } from "react-router-dom";
-
+import {CameraResultType, CameraSource, Plugins} from '@capacitor/core';
+const { Camera } = Plugins;
 
 async function savePicture(blobUrl, userId){
 const pictureRef = storage.ref(`/users/${userId}/pictures/${Date.now()}`);
@@ -38,18 +40,29 @@ const AddEntryPage: React.FC = () => {
   const history = useHistory();
   const fileInputRef = useRef<HTMLInputElement>();
 
-
-
-
-
-
-
-
   useEffect(() => () => {
     if(pictureUrl.startsWith('blob:')){
       URL.revokeObjectURL(pictureUrl);
     }
   },[pictureUrl]);
+
+
+  const handlePictureClick = async () => {
+    if (isPlatform('capacitor')){
+      try { 
+        const photo = await Camera.getPhoto({
+          resultType: CameraResultType.Uri,
+          source: CameraSource.Prompt,
+          width: 600, 
+        });
+        setPictureUrl(photo.webPath);
+      } catch (error){
+        console.log('Camera error:', error);
+      }
+    } else {
+      fileInputRef.current.click();
+    }   
+};
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if(event.target.files.length > 0){
@@ -98,7 +111,7 @@ const AddEntryPage: React.FC = () => {
             onChange={handleFileChange}
           />
           <img src = {pictureUrl} alt = "" style={{ cursor: 'pointer' }}
-            onClick={() => fileInputRef.current.click()}
+            onClick={handlePictureClick}
           />
         </IonItem>
 

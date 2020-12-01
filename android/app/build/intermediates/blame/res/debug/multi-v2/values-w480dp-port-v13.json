@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Student\\Desktop\\Dan work (201900162)\\mobo app\\MangoTime-Tracker\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
+            "outputFile": "C:\\Users\\Student\\Desktop\\Dan work (201900162)\\mobo app\\Daily-Moments\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Student\\.gradle\\caches\\transforms-2\\files-2.1\\051eaa9027caada5026e12dfeac8bc27\\material-1.1.0-rc02\\res\\values-w480dp-port-v13\\values-w480dp-port-v13.xml",
